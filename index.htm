@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+<body>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="input-group">
+            <section class="input-group-btn">
+                <button class="btn btn-success" type="button" id="start">Start</button>
+            </section>
+            <input type="text" class="form-control" placeholder="name of the file:" id="pathinfo">
+            <input type="file" id="uoploadImg" class="form-control" accept="image/*">
+            <span class="input-group-addon">auto calculate：
+                <input type="checkbox" aria-label="..." id="autocalc">
+            </span>
+        </div>
+        <select id="selection" class="form-control">
+            <option value="1">dot</option>
+            <option value="0">character</option>
+        </select>
+    </div>
+    <div class="col-lg-2">
+        long of side setting：
+        <input type="range" max=100 min=1 class="form-control">
+    </div>
+    <div class="col-lg-2">
+        color setting：
+        <input type="color" class="form-control" id="colour" value="#ffffff">
+    </div>
+</div>
+<canvas id="canvas"></canvas>
+<script src="assets/js/dice.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

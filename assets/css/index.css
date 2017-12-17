@@ -1,0 +1,42 @@
+@import "../lib/bootstrap.min.css";
+
+#start{
+    text-shadow: 0 0 1em red, 0 0 2em silver;
+}
+
+
+input[id=uoploadImg].form-control{
+    width: 60%;
+    position: absolute;
+    opacity: 0;
+}
+
+input[type=range].form-control{
+    -webkit-appearance: none;
+    width: 200px;
+    outline: 0 none;
+    margin: 0 auto;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    height: 15px;
+    border-radius: 10px;
+    box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112;
+}
+
+input[type=range], input[type=color]{
+    cursor: pointer;
+    border-radius: 10px;
+}
+#selection{
+    width: 90px;
+    height: 30px;
+    font-family: Caslon;
+    margin-top: 10px;
+    padding: 0;
+}
+
+#canvas{
+    display: block;
+    margin: 0 auto;
+}
