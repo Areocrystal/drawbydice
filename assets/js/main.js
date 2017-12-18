@@ -16,20 +16,22 @@
 (function(doc){
 
     var concatImg = {
+
         init(){
-            this.file = doc.querySelector('input[id="uoploadImg"]')
-            this.cas = doc.getElementById('canvas')
+            var getId = doc.getElementById.bind(doc)
+            this.file = getId('uoploadImg')
+            this.cas = getId('canvas')
             this.canvas = doc.createElement('canvas')
             this.ctx = this.cas.getContext('2d')
             this.ctx2 = this.canvas.getContext('2d')
             this.img = new Image()
             this.fr = new FileReader()
-            this.range = doc.querySelector('input[type="range"]')
-            this.autoCalc = doc.getElementById('autocalc')
-            this.trigger = doc.getElementById('start')
-            this.colour = doc.getElementById('colour')
-            this.path = doc.getElementById('pathinfo')
-            this.selection = doc.getElementById('selection')
+            this.range = getId('range')
+            this.autoCalc = getId('autocalc')
+            this.trigger = getId('start')
+            this.colour = getId('colour')
+            this.path = getId('pathinfo')
+            this.selection = getId('selection')
             this.maxUnitPixel = +this.range.value
             this.unitPixelColor = this.colour.value
             this.isAutoCalc = this.autoCalc.checked
@@ -51,7 +53,7 @@
                         this.unitPixelColor = e.target.value
                         break
                     case this.selection:
-                        this.selectionValue = +e.target.value
+                        this.selectionValue = e.target.value
                         this.drawDetail = this.primitiveDrawDetail
                         break
                     case this.autoCalc:
@@ -121,26 +123,43 @@
         },
 
         primitiveDrawDetail(){
-            this.drawDetail = this.selectionValue ? function(x, y, size, I, J){
-                this.ctx2.beginPath()
-                this.ctx2.fillStyle = this.unitPixelColor
-                this.ctx2.arc(x + size * (2 * J + 1),
-                    y + size * (2 * I + 1), size, 0, 2 * Math.PI)
-                this.ctx2.fill()
-                this.ctx2.closePath()
-            } : function(x, y, size, I, J){
-                this.ctx2.beginPath()
-                this.ctx2.fillStyle = this.unitPixelColor
-                var txt = this.pixelCollection[this.getRnd(this.pixelCollectionLen)]
-                this.ctx2.font = `${size}px consolas`
-                this.ctx2.textBaseline = 'hanging'
-                this.ctx2.fillText(txt,
-                    x + 2 * size * J,
-                    y + 2 * size * I)
-                this.ctx2.fill()
-                this.ctx2.closePath()
+            switch(this.selectionValue){
+                case '1':
+                    this.drawDetail = (x, y, size, I, J) => {
+                        this.ctx2.beginPath()
+                        this.ctx2.fillStyle = this.unitPixelColor
+                        this.ctx2.arc(x + size * (2 * J + 1),
+                            y + size * (2 * I + 1), size, 0, 2 * Math.PI)
+                        this.ctx2.fill()
+                        this.ctx2.closePath()
+                    }
+                    break
+                case '2':
+                    this.drawDetail = (x, y, size, I, J) => {
+                        this.ctx2.beginPath()
+                        this.ctx2.fillStyle = this.unitPixelColor
+                        var txt = this.pixelCollection[this.getRnd(this.pixelCollectionLen)]
+                        this.ctx2.font = `${size}px consolas`
+                        this.ctx2.textBaseline = 'hanging'
+                        this.ctx2.fillText(txt,
+                            x + 2 * size * J,
+                            y + 2 * size * I)
+                        this.ctx2.fill()
+                        this.ctx2.closePath()
+                    }
+                    break
+                case '3':
+                    this.drawDetail = (x, y, size, I ,J) => {
+                        this.ctx2.beginPath()
+                        this.ctx2.fillStyle = this.unitPixelColor
+                        this.ctx2.fillRect(x + size * J, y + size * I, size ,size)
+                        this.ctx2.fill()
+                        this.ctx2.closePath()
+                    }
+                    break
             }
         },
+
         getRnd(n, m) {
             if (arguments.length < 2) {
                 m = [n, n = 0][0]
