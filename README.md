@@ -1,2 +1,2 @@
-try to upload an image
+可以试一试上传人物的图片
 

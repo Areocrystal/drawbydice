@@ -64,7 +64,7 @@
                             primitivePath = e.target.value
                         this.path.value = primitivePath.substr(primitivePath.search(/[\\\/][^\\\/]+$/) + 1)
                         if (fe.length > 0 && /image\/\w{3,4}/.test(fe[0].type)) {
-                            this.loadFileReader(fe[0]).then((progressEvent) => {
+                            this.loadFileReader(fe[0]).then(progressEvent => {
                                 return this.loadImage(progressEvent)
                             }).then(() => {
                                 this.cw = this.cas.width = this.canvas.width = this.img.width
@@ -78,14 +78,14 @@
         },
 
         loadFileReader(f){
-            return new Promise((resolve) => {
+            return new Promise(resolve => {
                 this.fr.readAsDataURL(f)
                 this.fr.onload = (progressEvent) => resolve(progressEvent)
             })
         },
 
         loadImage(progressEvent){
-            return new Promise((resolve) => {
+            return new Promise(resolve => {
                 this.img.src = progressEvent.target.result
                 this.img.onload = () => resolve()
             })
@@ -222,5 +222,4 @@
     }
 
     concatImg.init()
-
 })(this.document)

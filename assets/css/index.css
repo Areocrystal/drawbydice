@@ -1,5 +1,8 @@
 @import "../lib/bootstrap.min.css";
 
+body{
+    overflow-x: hidden;
+}
 #start{
     text-shadow: 0 0 1em red, 0 0 2em silver;
 }
