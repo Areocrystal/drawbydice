@@ -30,6 +30,7 @@
             this.autoCalc = getId('autocalc')
             this.trigger = getId('start')
             this.colour = getId('colour')
+            this.bgc = getId('bgc')
             this.path = getId('pathinfo')
             this.selection = getId('selection')
             this.maxUnitPixel = +this.range.value
@@ -51,6 +52,9 @@
                         break
                     case this.colour:
                         this.unitPixelColor = e.target.value
+                        break
+                    case this.bgc:
+                        this.backgroundColor = e.target.value
                         break
                     case this.selection:
                         this.selectionValue = e.target.value
@@ -76,14 +80,12 @@
                 }
             }.bind(this), false)
         },
-
         loadFileReader(f){
             return new Promise(resolve => {
                 this.fr.readAsDataURL(f)
                 this.fr.onload = (progressEvent) => resolve(progressEvent)
             })
         },
-
         loadImage(progressEvent){
             return new Promise(resolve => {
                 this.img.src = progressEvent.target.result
@@ -112,7 +114,7 @@
 
         drawUnit(_self){
             var step = _self.grayscale / 25.6 | 0
-            this.ctx2.fillStyle = '#000'
+            this.ctx2.fillStyle = this.backgroundColor
             this.ctx2.fillRect(_self._x, _self._y, _self.edge, _self.edge)
             for (let i = dice[step].length - 1; i > -1 ; i--) {
                 for (let j = dice[step][i].length - 1; j > -1 ; j--) {
@@ -139,7 +141,7 @@
                         this.ctx2.beginPath()
                         this.ctx2.fillStyle = this.unitPixelColor
                         var txt = this.pixelCollection[this.getRnd(this.pixelCollectionLen)]
-                        this.ctx2.font = `${size}px consolas`
+                        this.ctx2.font = `${size}px Consolas`
                         this.ctx2.textBaseline = 'hanging'
                         this.ctx2.fillText(txt,
                             x + 2 * size * J,
@@ -222,4 +224,5 @@
     }
 
     concatImg.init()
+
 })(this.document)

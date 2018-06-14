@@ -6,31 +6,38 @@
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
-<div class="row">
-    <div class="col-lg-4">
-        <div class="input-group">
-            <section class="input-group-btn">
-                <button class="btn btn-success" type="button" id="start">Start</button>
-            </section>
-            <input type="text" class="form-control" placeholder="name of the file:" id="pathinfo">
-            <input type="file" id="uoploadImg" class="form-control" accept="image/*">
-            <span class="input-group-addon">auto calculate：
+<div class="container-fluid" style="padding-top: 5px;">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="input-group">
+                <section class="input-group-btn">
+                    <button class="btn btn-success" type="button" id="start">开始绘制</button>
+                </section>
+                <input type="text" class="form-control" placeholder="文件名" id="pathinfo">
+                <input type="file" id="uoploadImg" class="form-control" accept="image/*">
+                <span class="input-group-addon">auto calculate：
                 <input type="checkbox" aria-label="..." id="autocalc">
             </span>
+            </div>
         </div>
-        <select id="selection" class="form-control">
-            <option value="1">dot</option>
-            <option value="2">character</option>
-            <option value="3">brick</option>
-        </select>
+        <div class="col-sm-6">
+            基本单元大小：<input type="range" max=100 min=1 class="form-control" id="range" style="display:inline-block;vertical-align: middle;">
+        </div>
     </div>
-    <div class="col-lg-2">
-        long of side setting：
-        <input type="range" max=100 min=1 class="form-control" id="range">
-    </div>
-    <div class="col-lg-2">
-        color setting：
-        <input type="color" class="form-control" id="colour" value="#ffffff">
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-sm-2">
+            <select id="selection" class="form-control">
+                <option value="1">圆点</option>
+                <option value="2">字符</option>
+                <option value="3">方块</option>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            单位元素颜色：<input type="color" class="form-control nor" id="colour" value="#ffffff">
+        </div>
+        <div class="col-sm-3">
+            背景颜色：<input type="color" class="form-control nor" id="bgc" value="#000000">
+        </div>
     </div>
 </div>
 <canvas id="canvas"></canvas>
