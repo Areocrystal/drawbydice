@@ -2,18 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Pixel</title>
     <link rel="stylesheet" type="text/css" href="assets/css/index.css">
 </head>
 <body>
 <div class="container-fluid" style="padding-top: 5px;">
+    <h5 class="alert alert-warning" role="alert" style="width: 60%;">PC端运行。先本地上传原图，再在各控制框调整好参数，点击“开始绘制”即可出效果</h5>
     <div class="row">
         <div class="col-sm-6">
             <div class="input-group">
                 <section class="input-group-btn">
                     <button class="btn btn-success" type="button" id="start">开始绘制</button>
                 </section>
-                <input type="text" class="form-control" placeholder="必须先上传原图，这里显示文件名" id="pathinfo">
+                <input type="text" class="form-control" placeholder="文件名" id="pathinfo">
                 <input type="file" id="uoploadImg" class="form-control" accept="image/*">
                 <span class="input-group-addon">auto calculate：
                 <input type="checkbox" aria-label="..." id="autocalc">

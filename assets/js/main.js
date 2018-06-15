@@ -13,11 +13,11 @@
 //    }
 //}
 
-(function(doc){
+(function (doc) {
 
     var concatImg = {
 
-        init(){
+        init() {
             var getId = doc.getElementById.bind(doc)
             this.file = getId('uoploadImg')
             this.cas = getId('canvas')
@@ -35,6 +35,7 @@
             this.selection = getId('selection')
             this.maxUnitPixel = +this.range.value
             this.unitPixelColor = this.colour.value
+            this.backgroundColor = this.bgc.value
             this.isAutoCalc = this.autoCalc.checked
             this.selectionValue = this.selection.value
             this.pixelCollection =
@@ -44,7 +45,7 @@
             this.bindEvent.call(this)
         },
 
-        bindEvent(){
+        bindEvent() {
             doc.addEventListener('change', function (e) {
                 switch (e.target) {
                     case this.range:
@@ -80,25 +81,24 @@
                 }
             }.bind(this), false)
         },
-        loadFileReader(f){
+        loadFileReader(f) {
             return new Promise(resolve => {
                 this.fr.readAsDataURL(f)
                 this.fr.onload = (progressEvent) => resolve(progressEvent)
             })
         },
-        loadImage(progressEvent){
+        loadImage(progressEvent) {
             return new Promise(resolve => {
                 this.img.src = progressEvent.target.result
                 this.img.onload = () => resolve()
             })
         },
 
-        getImgSegments(){
-            var segmentsX,
-                segmentsY
+        getImgSegments() {
+            let segmentsX, segmentsY
             this.unitImgEdge = this.isAutoCalc ?
-            this.minCommonMutiple(this.cw, this.ch) :
-            this.maxUnitPixel
+                this.minCommonMutiple(this.cw, this.ch) :
+                this.maxUnitPixel
             segmentsX = Math.ceil(this.cw / this.unitImgEdge)
             segmentsY = Math.ceil(this.ch / this.unitImgEdge)
             for (let i = 0; i < segmentsX; i++) {
@@ -112,20 +112,20 @@
             this.ctx.drawImage(this.canvas, 0, 0)
         },
 
-        drawUnit(_self){
+        drawUnit(_self) {
             var step = _self.grayscale / 25.6 | 0
             this.ctx2.fillStyle = this.backgroundColor
             this.ctx2.fillRect(_self._x, _self._y, _self.edge, _self.edge)
-            for (let i = dice[step].length - 1; i > -1 ; i--) {
-                for (let j = dice[step][i].length - 1; j > -1 ; j--) {
+            for (let i = dice[step].length - 1; i > -1; i--) {
+                for (let j = dice[step][i].length - 1; j > -1; j--) {
                     dice[step][i][j] === 1 &&
                     this.drawDetail(_self._x, _self._y, _self.r, i, j)
                 }
             }
         },
 
-        primitiveDrawDetail(){
-            switch(this.selectionValue){
+        primitiveDrawDetail() {
+            switch (this.selectionValue) {
                 case '1':
                     this.drawDetail = (x, y, size, I, J) => {
                         this.ctx2.beginPath()
@@ -151,10 +151,10 @@
                     }
                     break
                 case '3':
-                    this.drawDetail = (x, y, size, I ,J) => {
+                    this.drawDetail = (x, y, size, I, J) => {
                         this.ctx2.beginPath()
                         this.ctx2.fillStyle = this.unitPixelColor
-                        this.ctx2.fillRect(x + size * J, y + size * I, size ,size)
+                        this.ctx2.fillRect(x + size * J, y + size * I, size, size)
                         this.ctx2.fill()
                         this.ctx2.closePath()
                     }
@@ -172,7 +172,7 @@
             return ~~(Math.random() * (m - n)) + n
         },
 
-        minCommonMutiple(a, b){
+        minCommonMutiple(a, b) {
             if (Math.abs(a) > 1 && Math.abs(b) > 1) {
                 var x = Math.min(a, b),
                     y = Math.max(a, b),
@@ -215,7 +215,7 @@
                 count = 0
             for (let i = 0; i < len; i += 4) {
                 average +=
-                (imgData[i] + imgData[i + 1] + imgData[i + 2]) / 3
+                    (imgData[i] + imgData[i + 1] + imgData[i + 2]) / 3
                 count++
             }
             this.grayscale = average / count
