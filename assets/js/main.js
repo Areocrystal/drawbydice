@@ -12,7 +12,6 @@
 //        return res;
 //    }
 //}
-
 (function (doc) {
 
     var concatImg = {
@@ -75,6 +74,7 @@
                                 this.cw = this.cas.width = this.canvas.width = this.img.width
                                 this.ch = this.cas.height = this.canvas.height = this.img.height
                                 this.trigger.onclick = () => this.getImgSegments()
+                                this.trigger.ontouchstart = () => this.getImgSegments()
                             })
                         }
                         break
@@ -178,7 +178,7 @@
                     y = Math.max(a, b),
                     res = this.maxUnitPixel
                 for (let i = x - 1; i > this.maxUnitPixel; i--) {
-                    if (x % i == 0 && y % i == 0) {
+                    if (x % i === 0 && y % i === 0) {
                         res = i
                     }
                 }
